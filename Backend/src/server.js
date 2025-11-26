@@ -3,7 +3,7 @@ import EN from "./lib/ENV.js";
 import  {connectDB} from "./lib/db.js";
 import cors from "cors"
 import {serve} from "inngest/express"
-
+import sessionRoutes from "./Routes/sessionRoutes.js"
 import { inngest,functions} from "./lib/inngest.js";
 const app = express();
 
@@ -16,7 +16,7 @@ app.use("/api/inngest", serve({
   functions,
   serveHealthCheck: true
 }));
-
+app.use("/api/sessions",sessionRoutes)
 app.get("/",(req,res)=>{
   res.status(200).json({msg:"Hello"})
 })

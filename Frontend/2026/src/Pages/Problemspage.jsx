@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar'
 import { PROBLEMS } from '../data/problems'
 import { link } from 'framer-motion/client';
 import { Link } from 'react-router';
-import { ChevronRightIcon, Code2Icon, Wrench } from 'lucide-react';
+import { BookOpenIcon, ChevronRightIcon, Code2Icon, FlameIcon, LoaderIcon, Sparkle, SparklesIcon, Wrench } from 'lucide-react';
 import { getDifficultyBadgeClass } from '../lib/utils';
 function Problemspage() {
   const problems = Object.values(PROBLEMS);
@@ -62,19 +62,26 @@ function Problemspage() {
           <div className='card-body'>
             <div className='stats stats-vertical lg:stats-horizontal'>
               <div className='stat'>
-                <div className='stat-title'>Total Problems</div>
-                <div className='stat-value text-'>{problems.length}</div>
+                <div className='stat-title flex items-center gap-3 text-blue-400' >Total Problems
+                <BookOpenIcon className='size-6 text-blue-400'></BookOpenIcon></div>
+                <div className='stat-value text- text-blue-400'>{problems.length}</div>
                 </div>
                  <div className='stat'>
-                <div className='stat-title'>Easy</div>
+                <div className='stat-title flex items-center gap-3 text-green-500'>Easy
+                <SparklesIcon className='size-6 text-green-500' ></SparklesIcon>
+                </div>
                 <div className='stat-value text-success'>{easyProblems}</div>
                 </div>
                  <div className='stat'>
-                <div className='stat-title'>Medium</div>
+                <div className='stat-title flex items-center gap-3 text-yellow-300' >
+                Medium
+                <LoaderIcon className='size-6 text-yellow-300'></LoaderIcon></div>
                 <div className='stat-value text-warning'>{mediumProblems}</div>
               </div>
                <div className='stat'>
-                <div className='stat-title'>Hard(nhk)</div>
+                <div className='stat-title flex items-center gap-3 text-red-600'>Hard(nhk)
+                  <FlameIcon className='size-6 text-red-600'></FlameIcon>
+                </div>
                 <div className='stat-value text-error'>{hardProblems}</div>
               </div>
             </div>
