@@ -1,6 +1,6 @@
 import React from 'react';
 import { getDifficultyBadgeClass } from "../lib/utils";
-import { motion } from "framer-motion";  
+
 import { CircleDotIcon } from "lucide-react";
 
 function ProblemDescription({ problem, currentProblemId, onProblemChange, allProblems }) {
