@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import { PROBLEMS } from '../data/problems'
-import { link } from 'framer-motion/client';
 import { Link } from 'react-router';
 import { BookOpenIcon, ChevronRightIcon, Code2Icon, FlameIcon, LoaderIcon, Sparkle, SparklesIcon, Wrench } from 'lucide-react';
 import { getDifficultyBadgeClass } from '../lib/utils';
