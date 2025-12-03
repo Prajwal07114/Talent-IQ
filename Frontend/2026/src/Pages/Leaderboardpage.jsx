@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../Components/Navbar'
+import Navbar from '../Components_07/Navbar'
 import { MedalIcon } from 'lucide-react'
 
 function Leaderboardpage() {

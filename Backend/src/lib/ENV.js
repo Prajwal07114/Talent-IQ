@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
-const EN = {
+const ENV = {
   PORT:process.env.PORT,
   DB:process.env.DB_url,
   INNGEST_EVENT_KEY:process.env.INNGEST_EVENT_KEY,
@@ -12,4 +12,4 @@ const EN = {
   CLIENT_URL:process.env.CLIENT_URL
 }
 
-export default EN;
+export default ENV;

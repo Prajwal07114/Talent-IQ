@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../Components/Navbar'
+import Navbar from "../Components_07/Navbar"
 import { PROBLEMS } from '../data/problems'
 import { Link } from 'react-router';
 import { BookOpenIcon, ChevronRightIcon, Code2Icon, FlameIcon, LoaderIcon, Sparkle, SparklesIcon, Wrench } from 'lucide-react';

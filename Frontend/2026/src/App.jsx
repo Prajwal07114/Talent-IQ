@@ -1,28 +1,32 @@
-
-import { SignedOut,SignInButton, SignOutButton,SignedIn, UserButton, useUser } from "@clerk/clerk-react";
-import { Routes,Route, Navigate} from "react-router";
-import Homepage from "./Pages/Homepage";
-import Problemspage from "./Pages/Problemspage";
-import Dashboard from "./Pages/Dashboard";
+import { useUser } from "@clerk/clerk-react";
+import { Navigate, Route, Routes } from "react-router";
+import HomePage from "./Pages/Homepage"
 import { Toaster } from "react-hot-toast";
-import Leaderboardpage from "./Pages/Leaderboardpage";
-import Problempage from "./Pages/Problempage";
+import DashboardPage from "./pages/DashboardPage";
+import ProblemPage from "./Pages/Problempage"
+import ProblemsPage from "./Pages/Problemspage"
+import SessionPage from "./Pages/SessionPage"
 
-function App(){   
-      const {isSignedIn} = useUser()
-        return(
-<>
-    <Routes>
-   <Route path="/" element={!isSignedIn?<Homepage/> : <Navigate to={"/dashboard"}/>}></Route>
-       <Route path="/dashboard" element={isSignedIn? <Dashboard/> : <Navigate to={"/"}/>} /> 
-   <Route path="/Problems" element={isSignedIn ? <Problemspage/> : <Navigate to={"/"}/>}></Route> 
-   <Route path="/problem/:id" element={isSignedIn? <Problempage/> : <Navigate to={"/"}/>}></Route>
-   <Route path="/leaderboard" element={isSignedIn? <Leaderboardpage/>:<Navigate to={'/'} />}></Route>
-    </Routes>
+function App() {
+  const { isSignedIn, isLoaded } = useUser();
 
-    <Toaster/>
+  // this will get rid of the flickering effect
+  if (!isLoaded) return null;
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={!isSignedIn ? <HomePage /> : <Navigate to={"/dashboard"} />} />
+        <Route path="/dashboard" element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />} />
+
+        <Route path="/problems" element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"} />} />
+        <Route path="/problem/:id" element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />} />
+        <Route path="/session/:id" element={isSignedIn ? <SessionPage /> : <Navigate to={"/"} />} />
+      </Routes>
+
+      <Toaster toastOptions={{ duration: 3000 }} />
     </>
-  )
+  );
 }
 
 export default App;

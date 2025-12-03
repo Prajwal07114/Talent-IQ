@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../Components/Navbar'
+import Navbar from "../Components_07/Navbar"
 import { useNavigate, useParams } from 'react-router'
 import { PROBLEMS } from '../data/problems'
 import {Panel,PanelGroup,PanelResizeHandle} from "react-resizable-panels"
-import CodeEditor from '../Components/CodeEditor'
-import ProblemDescription from '../Components/ProblemDescription'
-import OutputPanel from '../Components/OutputPanel'
+import CodeEditor from '../Components_07/CodeEditor'
+import ProblemDescription from '../Components_07/ProblemDescription'
+import OutputPanel from '../Components_07/OutputPanel'
 import toast from "react-hot-toast"
 import confetti from "canvas-confetti";
 import { executeCode } from "../lib/piston";
