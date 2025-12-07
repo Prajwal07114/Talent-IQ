@@ -1,7 +1,9 @@
+// Inside your axiosInstance file (e.g., ../lib/axios.js)
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api", // <-- change to HTTP
+  // 🟢 CORRECT: Use the relative path that matches your Vite proxy config
+  baseURL: "/api", 
   withCredentials: true,
 });
 

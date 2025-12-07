@@ -8,7 +8,7 @@ import Navbar from "../Components_07/Navbar";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { Loader2Icon, LogOutIcon, PhoneOffIcon } from "lucide-react";
-import CodeEditor from "../Components_07/CodeEditor";
+import CodeEditorPanel from "../Components_07/CodeEditor"
 import OutputPanel from "../Components_07/OutputPanel";
 
 import useStreamClient from "../hooks/useStreamClient";

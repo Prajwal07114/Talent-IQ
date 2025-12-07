@@ -20,7 +20,7 @@ function CreateSessionModal({ isOpen, onClose, roomConfig, setRoomConfig }) {
       // 1️⃣ Create session in DB
       const { session } = await createSessionMutation.mutateAsync({
         problem: roomConfig.problem,
-        difficulty: roomConfig.difficulty,
+        difficulty: roomConfig.difficulty.toLowerCase(),
       });
 
       // 2️⃣ Request Stream Video token from backend
