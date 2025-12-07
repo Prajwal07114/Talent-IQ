@@ -32,7 +32,8 @@ export async function createSession(req, res) {
       members: [clerkId],
     });
 
-    await channel.create();
+   await channel.createOrGet();
+
 
     res.status(201).json({ session });
   } catch (error) {

@@ -1,17 +1,57 @@
+import { useState } from "react";
 import { Code2Icon, LoaderIcon, PlusIcon } from "lucide-react";
 import { PROBLEMS } from "../data/problems";
+import toast from "react-hot-toast";
+import { useCreateSession } from "../hooks/useSessions";
+import { initializeStreamClient } from "../lib/stream";
 
-function CreateSessionModal({
-  isOpen,
-  onClose,
-  roomConfig,
-  setRoomConfig,
-  onCreateRoom,
-  isCreating,
-}) {
+function CreateSessionModal({ isOpen, onClose, roomConfig, setRoomConfig }) {
   const problems = Object.values(PROBLEMS);
+  const [isCreating, setIsCreating] = useState(false);
+  const createSessionMutation = useCreateSession();
 
   if (!isOpen) return null;
+
+  const onCreateRoom = async () => {
+    if (!roomConfig.problem) return;
+    setIsCreating(true);
+
+    try {
+      // 1️⃣ Create session in DB
+      const { session } = await createSessionMutation.mutateAsync({
+        problem: roomConfig.problem,
+        difficulty: roomConfig.difficulty,
+      });
+
+      // 2️⃣ Request Stream Video token from backend
+      const res = await fetch("/api/stream-token");
+      const data = await res.json();
+      const { token, userId, userName, userImage } = data;
+
+      // 3️⃣ Initialize Stream Video client
+      const client = await initializeStreamClient(
+        { id: userId, name: userName, image: userImage },
+        token
+      );
+
+      // 4️⃣ Create/join video call
+      const videoCall = client.call("default", session.callId);
+      await videoCall.getOrCreate({
+        data: {
+          custom: { sessionId: session._id, problem: session.problem },
+        },
+      });
+      await videoCall.join();
+
+      toast.success("Room created successfully!");
+      onClose();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to create room");
+    } finally {
+      setIsCreating(false);
+    }
+  };
 
   return (
     <div className="modal modal-open">
@@ -19,7 +59,7 @@ function CreateSessionModal({
         <h3 className="font-bold text-2xl mb-6">Create New Session</h3>
 
         <div className="space-y-8">
-          {/* PROBLEM SELECTION */}
+          {/* Problem Selection */}
           <div className="space-y-2">
             <label className="label">
               <span className="label-text font-semibold">Select Problem</span>
@@ -40,7 +80,6 @@ function CreateSessionModal({
               <option value="" disabled>
                 Choose a coding problem...
               </option>
-
               {problems.map((problem) => (
                 <option key={problem.id} value={problem.title}>
                   {problem.title} ({problem.difficulty})
@@ -49,7 +88,7 @@ function CreateSessionModal({
             </select>
           </div>
 
-          {/* ROOM SUMMARY */}
+          {/* Room Summary */}
           {roomConfig.problem && (
             <div className="alert alert-success">
               <Code2Icon className="size-5" />
@@ -76,12 +115,7 @@ function CreateSessionModal({
             onClick={onCreateRoom}
             disabled={isCreating || !roomConfig.problem}
           >
-            {isCreating ? (
-              <LoaderIcon className="size-5 animate-spin" />
-            ) : (
-              <PlusIcon className="size-5" />
-            )}
-
+            {isCreating ? <LoaderIcon className="size-5 animate-spin" /> : <PlusIcon className="size-5" />}
             {isCreating ? "Creating..." : "Create"}
           </button>
         </div>
@@ -90,4 +124,5 @@ function CreateSessionModal({
     </div>
   );
 }
+
 export default CreateSessionModal;

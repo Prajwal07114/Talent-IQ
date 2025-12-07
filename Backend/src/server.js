@@ -9,8 +9,8 @@ import  ENV  from "./lib/ENV.js";
 import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 
-import chatRoutes from "./routes/chatRoute.js";
-import sessionRoutes from "./routes/sessionRoutes.js";
+import chatRoutes from "./Routes/ChatRoutes.js";
+import sessionRoutes from "./Routes/sessionRoutes.js";
 
 const app = express();
 

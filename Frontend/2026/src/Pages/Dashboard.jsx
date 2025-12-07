@@ -5,7 +5,7 @@ import { useActiveSessions, useCreateSession, useMyRecentSessions } from "../hoo
 
 import Navbar from "../Components_07/Navbar";
 import WelcomeSection from "../Components_07/WelcomeSection";
-import StatsCards from "../Components_07/StatsCards";
+import StatsCards from "../Components_07/StatsCard";
 import ActiveSessions from "../Components_07/ActiveSessions";
 import RecentSessions from "../Components_07/RecentSessions";
 import CreateSessionModal from "../Components_07/CreateSessionModal"
